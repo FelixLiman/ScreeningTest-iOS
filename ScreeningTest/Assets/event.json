@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Gathering Event",
+    "image": "event_1",
+    "date": "15 Sept 2021"
+  },
+  {
+    "id": 2,
+    "name": "Gala Dinner Event",
+    "image": "event_2",
+    "date": "11 Apr 2016"
+  },
+  {
+    "id": 3,
+    "name": "Senimar Event",
+    "image": "event_3",
+    "date": "21 Jan 2008"
+  },
+  {
+    "id": 4,
+    "name": "Collaboration Event",
+    "image": "event_4",
+    "date": "06 Jun 2020"
+  },
+  {
+    "id": 5,
+    "name": "Webinar Event",
+    "image": "event_5",
+    "date": "07 Jun 2019"
+  }
+]
