@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Stevia
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

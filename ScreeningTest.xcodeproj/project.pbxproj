@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09268198269C000D00018AF8 /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09268197269C000D00018AF8 /* EventCollectionCell.swift */; };
+		0926819B269C00E900018AF8 /* Stevia in Frameworks */ = {isa = PBXBuildFile; productRef = 0926819A269C00E900018AF8 /* Stevia */; };
 		0966FA6A269AA0AC005F7F29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966FA69269AA0AC005F7F29 /* AppDelegate.swift */; };
 		0966FA73269AA0AE005F7F29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0966FA72269AA0AE005F7F29 /* Assets.xcassets */; };
 		0966FA76269AA0AE005F7F29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0966FA74269AA0AE005F7F29 /* LaunchScreen.storyboard */; };
@@ -35,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09268197269C000D00018AF8 /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		0966FA66269AA0AC005F7F29 /* ScreeningTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreeningTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0966FA69269AA0AC005F7F29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0966FA72269AA0AE005F7F29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +71,7 @@
 			files = (
 				0966FA9C269AA275005F7F29 /* RxSwift in Frameworks */,
 				0966FA9A269AA275005F7F29 /* RxCocoa in Frameworks */,
+				0926819B269C00E900018AF8 /* Stevia in Frameworks */,
 				0966FA97269AA264005F7F29 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				0966FAAA269AA9D7005F7F29 /* EventTabelCell.swift */,
+				09268197269C000D00018AF8 /* EventCollectionCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				0966FA96269AA264005F7F29 /* SnapKit */,
 				0966FA99269AA275005F7F29 /* RxCocoa */,
 				0966FA9B269AA275005F7F29 /* RxSwift */,
+				0926819A269C00E900018AF8 /* Stevia */,
 			);
 			productName = ScreeningTest;
 			productReference = 0966FA66269AA0AC005F7F29 /* ScreeningTest.app */;
@@ -260,6 +266,7 @@
 			packageReferences = (
 				0966FA95269AA264005F7F29 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				0966FA98269AA275005F7F29 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				09268199269C00E900018AF8 /* XCRemoteSwiftPackageReference "Stevia" */,
 			);
 			productRefGroup = 0966FA67269AA0AC005F7F29 /* Products */;
 			projectDirPath = "";
@@ -298,6 +305,7 @@
 				0966FA6A269AA0AC005F7F29 /* AppDelegate.swift in Sources */,
 				0966FA8E269AA1DA005F7F29 /* GuestView.swift in Sources */,
 				0966FAAB269AA9D7005F7F29 /* EventTabelCell.swift in Sources */,
+				09268198269C000D00018AF8 /* EventCollectionCell.swift in Sources */,
 				0966FAB6269AB162005F7F29 /* GuestCollectionCell.swift in Sources */,
 				0966FA90269AA1E2005F7F29 /* GuestViewController.swift in Sources */,
 				0966FAA6269AA5EB005F7F29 /* AlertMessageType.swift in Sources */,
@@ -504,6 +512,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		09268199269C00E900018AF8 /* XCRemoteSwiftPackageReference "Stevia" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/freshOS/Stevia.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		0966FA95269AA264005F7F29 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -523,6 +539,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0926819A269C00E900018AF8 /* Stevia */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09268199269C00E900018AF8 /* XCRemoteSwiftPackageReference "Stevia" */;
+			productName = Stevia;
+		};
 		0966FA96269AA264005F7F29 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0966FA95269AA264005F7F29 /* XCRemoteSwiftPackageReference "SnapKit" */;

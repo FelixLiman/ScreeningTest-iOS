@@ -17,11 +17,15 @@ final class GuestViewController: UIViewController {
     
     var callback: ((String) -> Void) = { _ in }
     
+    var disposable = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = root
+        root.guestCollectionView.refreshControl?.beginRefreshing()
         
         getData()
+        setRefresh()
         root.guestCollectionView.delegate = self
         root.guestCollectionView.dataSource = self
     }
@@ -35,26 +39,34 @@ final class GuestViewController: UIViewController {
                 self.guestData = parse(jsonData: data)
                 DispatchQueue.main.async {
                     self.root.guestCollectionView.reloadData()
+                    self.root.guestCollectionView.refreshControl?.endRefreshing()
                 }
             case .failure(let error):
                 print(error)
-                let actionSheet = UIAlertController(title: nil, message: "Something went wrong. Lets try again.", preferredStyle: .alert)
-                
-                let titleAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemPurple]
-                let titleString = NSAttributedString(string: "Uh oh.", attributes: titleAttributes)
-                
-                actionSheet.setValue(titleString, forKey: "attributedTitle")
-                
-                let action = UIAlertAction(title: "Ok", style: .default) { action in
-                    self.getData()
-                }
-                action.setValue(UIColor.systemPurple, forKey: "titleTextColor")
-                
-                actionSheet.addAction(action)
-                
-                self.present(actionSheet, animated: true, completion: nil)
+                self.presentAlert(title: "Uh oh.",
+                             message: "Something went wrong. Lets try again.",
+                             actions: [
+                                UIAlertAction(title: "Ok", style: .default) { action in
+                                    self.getData()
+                                    
+                                }
+                             ])
             }
         }
+    }
+    
+    private func setRefresh() {
+        root.guestCollectionView.refreshControl?.rx.controlEvent(.valueChanged).subscribe { _ in
+            self.getData()
+        }.disposed(by: disposable)
+
+    }
+    
+    private func isPrime(_ number: Int) -> Bool {
+        guard number >= 2 else { return false }
+        guard number != 2 else { return true  }
+        guard number % 2 != 0 else { return false }
+        return !stride(from: 3, through: Int(sqrt(Double(number))), by: 2).contains { number % $0 == 0 }
     }
 }
 
@@ -77,37 +89,34 @@ extension GuestViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let model = guestData?[indexPath.item],
-              let birthDateSubstring = model.birthdate.split(separator: "-").last
+              let birthDateSubstring = model.birthdate.split(separator: "-").last,
+              let birthMonthSubString = model.birthdate.split(separator: "-").get(1)
         else { return }
         
         var alertTitle: String
         
+        let birthMonth = Int(String(birthMonthSubString)) ?? 0
+        let alertSecondTitle = isPrime(birthMonth) ? "Month is Prime" : "Month is not Prime"
+         
         let birthDate: Int = Int(String(birthDateSubstring)) ?? 0
         if birthDate.isMultiple(of: 6) {
-            alertTitle = "iOS"
+            alertTitle = "iOS\n\(alertSecondTitle)"
         } else if birthDate.isMultiple(of: 2) {
-            alertTitle = "Blackberry"
+            alertTitle = "Blackberry\n\(alertSecondTitle)"
         } else if birthDate.isMultiple(of: 3) {
-            alertTitle = "Android"
+            alertTitle = "Android\n\(alertSecondTitle)"
         } else {
-            alertTitle = "Feature Phone"
+            alertTitle = "Feature Phone\n\(alertSecondTitle)"
         }
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
-        let titleAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemPurple]
-        let titleString = NSAttributedString(string: alertTitle, attributes: titleAttributes)
-        
-        actionSheet.setValue(titleString, forKey: "attributedTitle")
-        
-        let action = UIAlertAction(title: "Ok", style: .default) { action in
-            self.callback(model.name)
-            self.navigationController?.popViewController(animated: true)
-        }
-        action.setValue(UIColor.systemPurple, forKey: "titleTextColor")
-        
-        actionSheet.addAction(action)
-        
-        present(actionSheet, animated: true, completion: nil)
+        self.presentAlert(title: alertTitle,
+                          message: "",
+                          actions: [
+                            UIAlertAction(title: "Ok", style: .default) { action in
+                                self.callback(model.name)
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                          ])
     }
 }
