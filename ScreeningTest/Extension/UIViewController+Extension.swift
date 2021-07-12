@@ -9,23 +9,22 @@ import UIKit
 
 extension UIViewController {
     
-    func presentAlert(title: String, message: String, actions: [UIAlertAction]) {
+    func presentAlert(message: AlertMessageType) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
         let titleAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.systemPurple]
-        let titleString = NSAttributedString(string: title, attributes: titleAttributes)
+        let titleString = NSAttributedString(string: "Uh Oh.", attributes: titleAttributes)
         
         let messageAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
-        let messageString = NSAttributedString(string: message, attributes: messageAttributes)
+        let messageString = NSAttributedString(string: message.rawValue.message, attributes: messageAttributes)
         
         actionSheet.setValue(titleString, forKey: "attributedTitle")
         actionSheet.setValue(messageString, forKey: "attributedMessage")
         
-        for action in actions {
-            action.setValue(UIColor.systemPurple, forKey: "titleTextColor")
-            actionSheet.addAction(action)
-        }
+        let action: UIAlertAction = UIAlertAction(title: message.rawValue.action, style: .default, handler: nil)
         
+        action.setValue(UIColor.systemPurple, forKey: "titleTextColor")
+        actionSheet.addAction(action)
         present(actionSheet, animated: true, completion: nil)
     }
 }

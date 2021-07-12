@@ -31,10 +31,8 @@ final class GuestView: UIView {
             $0.backgroundColor = .clear
             let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 16
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             $0.setCollectionViewLayout(layout, animated: true)
-            $0.alwaysBounceVertical = true
-            $0.refreshControl = UIRefreshControl()
+            $0.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         }
     }
     

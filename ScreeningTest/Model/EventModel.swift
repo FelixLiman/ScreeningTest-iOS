@@ -12,7 +12,4 @@ struct EventModel: Decodable {
     let name: String
     let image: String
     let date: String
-    let description: String
-    let lat: Float
-    let lng: Float
 }
